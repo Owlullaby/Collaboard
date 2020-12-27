@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Collaboard - where collaboration happens on the same board</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="./img/logo.png">
+		<link rel="stylesheet" href="popup.css">
+	</head>
+	<body style="text-align: center; background-color: #434b4b;width: 100%; height: auto;">
+		<div style="position: absolute; z-index: 8;top: 20%; left: 50%;transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%);">
+			<img src="./img/collaboard-logo-light.png" width=100%>
+		</div>
+		<div style="background-color: #434b4b; opacity: 0.2; z-index: 7;">
+			<canvas id="canvas" style="border-radius: 20px; border:10px solid #000000; background-color:cornsilk;"></canvas>
+			<div style="position: fixed; left:50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); bottom: 50px;">
+				<input type="image" id="pencil"  width="50px" src="./img/student.png"/>
+				<input type="image" id="eraser" width="50px" src="./img/clean.png"/>
+			</div>
+				<p id="status" style="color:cornsilk">Pencil selected.</p>
+		</div>
+		<!-- add popup -->
+		<div style="top: 50%; left: 50%; position:absolute; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); height: 30%; width: 30%;z-index: 8;">
+			<div>
+				<p style="color:cornsilk">Join to collab with your friends!</p>
+			</div>
+			<!-- <div style = "text-align: center"> -->
+				<button class="create-button" onclick="openForm()">Create</button>
+				<button class="open-button" onclick="openForm2()">Join</button>
+				
+			<!-- </div> -->
+		</div>
+		<div class="create-popup" id="createForm" enctype="application/x-www-form-urlencoded">
+			<div class="create-container" >
+			<form method="POST" action="/create">
+			
+			<p>Create Room</p>
+			<span></span>
+			<label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="usernamecreate" id="usernamecreate" required>
+		
+			<button type="submit"  class="btn" id="createbutton">Create</button>
+			</form>
+			<button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+			</div>
+		</div> 
+		
+		<div class="form-popup" id="joinForm" enctype="application/x-www-form-urlencoded">
+			<div class="form-container" >
+			<form method="POST" action="/join">
+			
+			<p>Join Room</p>
+		
+			<label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="usernamejoin" id="usernamejoin" required>
+		
+			<label for="rcode"><b>Room Code</b></label>
+			<input type="text" placeholder="Enter Room Code" name="roomcode" id = "roomcode" required>
+		
+			<button type="submit" class="btn" id="joinbutton">Join</button>
+			</form>
+			<button type="submit" class="btn cancel" onclick="closeForm2()">Close</button>
+			</div>
+		</div>
+		<script>
+			canvas.width = (window.innerWidth - 100);
+			canvas.height = (window.innerHeight - 80);
+			// open the popup
+			function openForm() {
+ 				document.getElementById("createForm").style.display = "block";
+			}
+
+			function closeForm() {
+  				document.getElementById("createForm").style.display = "none";
+			} 
+
+			function openForm2() {
+ 				document.getElementById("joinForm").style.display = "block";
+			}
+
+			function closeForm2() {
+  				document.getElementById("joinForm").style.display = "none";
+			}
+			function resizeCanvasToDisplaySize(canvas) {
+   				// look up the size the canvas is being displayed
+   				const width = canvas.clientWidth;
+   				const height = canvas.clientHeight;
+
+   				// If it's resolution does not match change it
+   				if (canvas.width !== width || canvas.height !== height) {
+    				canvas.width = width;
+     				canvas.height = height;
+     				return true;
+   				}
+
+   				return false;
+			}
+		</script>
+		<!-- <script type="module" src="./collaboard.js"></script> -->
+		<script type="module">
+            import init from "./collaboard.js";
+            init();
+        </script>
+	</body>
+</html>

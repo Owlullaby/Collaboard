@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Collaboard - where collaboration happens on the same board</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="./img/logo.png">
+		<link rel="stylesheet" href="popup.css">
+		<!-- <script src="collaboard.js"></script> -->
+		<script type="module">
+            import init from "./collaboard.js";
+            init();
+        </script>
+	</head>
+	<body style="text-align: center; background-color: #434b4b; width: 100%; height: auto;">
+		<div style="position: absolute; z-index: 9;top: 8%; left: 50%;transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%)">
+			<img src="./img/logo.png" width=50%>
+		</div>
+		<canvas id="canvas" style="border-radius: 20px; border:10px solid #000000; background-color:cornsilk;"></canvas>
+		<!-- object-fit: cover; width: 80vw; height: 90vh;  -->
+		<div style="position: fixed; left:50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); bottom: 50px;">
+			<input type="image" id="pencil"  width="50px" src="./img/student.png"/>
+			<input type="image" id="eraser" width="50px" src="./img/clean.png"/>
+		</div>
+		<p id="status" style="color:cornsilk">Pencil selected.</p>
+		<!-- add joined users -->
+		<div class= "special-container">
+			<div class="joined-container">
+				{% block room %}
+				{% endblock room %}
+			</div>
+			<button class="exit-button" onclick="openForm3()">Exit</button>
+		</div>
+		<!-- add popup -->
+
+		<div class="exit-popup" id="exitForm">
+			<div class="exit-container">
+			<form action="/">
+			  <p>Are you sure you want to exit?</p>
+		  
+			  <button type="submit" class="btn">Yes</button>
+			</form>
+			<button type="submit" class="btn cancel" onclick="closeForm3()">No</button>
+			</div>
+		</div> 
+		<script>
+			canvas.width = (window.innerWidth - 100);
+			canvas.height = (window.innerHeight - 80);
+			// open the popup
+
+			function openForm3() {
+ 				document.getElementById("exitForm").style.display = "block";
+			}
+
+			function closeForm3() {
+  				document.getElementById("exitForm").style.display = "none";
+			}
+		</script>
+	</body>
+</html>
