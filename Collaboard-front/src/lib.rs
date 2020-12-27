@@ -50,7 +50,7 @@ struct DataReceived<'a> {
 
 #[wasm_bindgen(start)]
 pub fn main() {
-	//get value from IP key in dotenv file
+	//get value from WS key in dotenv file
 	let addr = dotenv!("WS");
 	let ws: WebSocket = WebSocket::new(addr).unwrap();
 	let canvas: CanvasElement = document().query_selector( "#canvas" ).unwrap().unwrap().try_into().unwrap();
